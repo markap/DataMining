@@ -93,10 +93,10 @@ void init_table(Table *table)
     table->insert(UNDER30, LOW, STUDENT_YES, FAIR, COMPUTER_YES);
     table->insert(OVER40, MEDIUM, STUDENT_YES, FAIR, COMPUTER_YES);
 
-    table->insert(UNDER30, MEDIUM, STUDENT_YES, EXCELLENT, COMPUTER_YES);
-    table->insert(BTW30AND40, MEDIUM, STUDENT_NO, EXCELLENT, COMPUTER_YES);
-    table->insert(BTW30AND40, HIGH, STUDENT_YES, FAIR, COMPUTER_YES);
-    table->insert(OVER40, MEDIUM, STUDENT_NO, EXCELLENT, COMPUTER_NO);
+    //table->insert(UNDER30, MEDIUM, STUDENT_YES, EXCELLENT, COMPUTER_YES);
+    //table->insert(BTW30AND40, MEDIUM, STUDENT_NO, EXCELLENT, COMPUTER_YES);
+    //table->insert(BTW30AND40, HIGH, STUDENT_YES, FAIR, COMPUTER_YES);
+    //table->insert(OVER40, MEDIUM, STUDENT_NO, EXCELLENT, COMPUTER_NO);
 }
 
 
@@ -172,6 +172,14 @@ void classify(double *result_probability, Age age, Income income, Student studen
 }
 
 
+void print_classify_result(double *result_probability)
+{
+    cout << "The result is ... " << endl;
+    cout << "Probability for computer is ..." << result_probability[COMPUTER_YES] << endl;
+    cout << "Probability for no computer is ..." << result_probability[COMPUTER_NO] << endl;
+}
+
+
 int main() 
 {
     Table table;
@@ -196,10 +204,33 @@ int main()
     cout << probability_credit_rating[FAIR][COMPUTER_YES] << " ";
     cout << probability_credit_rating[FAIR][COMPUTER_NO] << endl;
 
+    cout << "zero prob" << endl;
+    cout << probabilty_age[BTW30AND40][COMPUTER_YES] << endl;
+    cout << probabilty_age[BTW30AND40][COMPUTER_NO] << endl;
+
     // classify
     double result_probability[COMPUTER_FEATURES] = {0};
     classify(result_probability, UNDER30, MEDIUM, STUDENT_YES, FAIR);
+    print_classify_result(result_probability);
 
-    cout << "Probability for computer is ..." << result_probability[COMPUTER_YES] << endl;
-    cout << "Probability for no computer is ..." << result_probability[COMPUTER_NO] << endl;
+
+    result_probability[COMPUTER_FEATURES] = {0};
+    classify(result_probability, BTW30AND40, MEDIUM, STUDENT_YES, FAIR);
+    print_classify_result(result_probability);
+
+    result_probability[COMPUTER_FEATURES] = {0};
+    classify(result_probability, UNDER30, LOW, STUDENT_YES, EXCELLENT);
+    print_classify_result(result_probability);
+
+    result_probability[COMPUTER_FEATURES] = {0};
+    classify(result_probability, OVER40, MEDIUM, STUDENT_YES, FAIR);
+    print_classify_result(result_probability);
+
+    result_probability[COMPUTER_FEATURES] = {0};
+    classify(result_probability, UNDER30, MEDIUM, STUDENT_NO, FAIR);
+    print_classify_result(result_probability);
+
+    result_probability[COMPUTER_FEATURES] = {0};
+    classify(result_probability, OVER40, LOW, STUDENT_YES, EXCELLENT);
+    print_classify_result(result_probability);
 }

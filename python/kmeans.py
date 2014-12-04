@@ -85,24 +85,14 @@ def cluster_iris():
     print len(clusters[1])
     print len(clusters[2])
 
-def cluster_cloud(): 
-    dataset = np.loadtxt('../data/cloud.data')
+def cluster_irisBig(): 
+    dataset = np.loadtxt('../data/iris1500K.csv', delimiter=',')[0:,0:-1]
     start = time.clock()
-    centers, clusters = kmeans(dataset, 6);
+    centers, clusters = kmeans(dataset, 3);
     end = time.clock()
     print end - start
-    print len(clusters[0])
-    print len(clusters[1])
-    print len(clusters[2])
-    start = time.clock()
-    centers, clusters = kmeans(dataset, 6, initialize);
-    end = time.clock()
-    print end - start
-    print len(clusters[0])
-    print len(clusters[1])
-    print len(clusters[2])
  
    
 
 if __name__ == '__main__':
-    cluster_cloud()
+    cluster_irisBig()

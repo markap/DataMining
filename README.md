@@ -1,1 +1,1 @@
-Data Mining algorithms in C++
+Kmeans variations
